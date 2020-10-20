@@ -1,0 +1,3 @@
+[submodule "rocker-versioned"]
+	path = rocker-versioned
+	url = https://github.com/rocker-org/rocker-versioned.git

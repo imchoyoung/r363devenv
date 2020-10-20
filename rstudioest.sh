@@ -1,0 +1,11 @@
+RDEV_HOST=${HOME}/rey
+RENV_PATHS_ROOT_HOST=${HOME}/caque/renv
+RENV_PATHS_ROOT_CONTAINER=/home/rstudio/renv
+docker run --rm -d \
+    --name rdevenv \
+    -e DISABLE_AUTH=true \
+    -e ROOT=TRUE \
+    -v "${RENV_PATHS_ROOT_HOST}:${RENV_PATHS_ROOT_CONTAINER}" \
+    -v "${RDEV_HOST}:/home/rstudio" \
+    -p 127.0.0.1:8787:8787 \
+    choyoung/rdevenv:latest
