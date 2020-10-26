@@ -8,4 +8,4 @@ docker run --rm -d \
     -v "${RENV_PATHS_ROOT_HOST}:${RENV_PATHS_ROOT_CONTAINER}" \
     -v "${RDEV_HOST}:/home/rstudio" \
     -p 127.0.0.1:8787:8787 \
-    choyoung/rdevenv:latest
+    alperceire/rdevenv
