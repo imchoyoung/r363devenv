@@ -36,6 +36,8 @@ RUN apt-get update && apt-get install -y \
   julia \
   # korean fonts
   fonts-nanum \
+  # textshaping
+  libharfbuzz-dev libfribidi-dev \
   && rm -rf /var/lib/apt/lists/*
 
 RUN echo "GITHUB_PAT=${GITHUB_PAT}" \
