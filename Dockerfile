@@ -44,3 +44,22 @@ RUN echo "GITHUB_PAT=${GITHUB_PAT}" \
   >> /usr/local/lib/R/etc/Renviron
 RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" \
   >> /usr/local/lib/R/etc/.Rprofile
+
+RUN apt-get update && apt-get install -y \
+  # rJava
+  default-jre default-jdk r-cran-rjava \
+  && rm -rf /var/lib/apt/lists/*
+RUN R CMD javareconf
+
+RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen
+
+# tinytex
+RUN wget -qO- "https://yihui.org/tinytex/install-unx.sh" \
+  | sh -s - --admin --no-path
+RUN ~/.TinyTeX/bin/*/tlmgr path add
+RUN chmod -R g+w ~/.TinyTeX \
+  && chmod -R g+wx ~/.TinyTeX/bin
+RUN wget "https://travis-bin.yihui.org/texlive-local.deb" \
+  && dpkg -i texlive-local.deb \
+  && rm texlive-local.deb
