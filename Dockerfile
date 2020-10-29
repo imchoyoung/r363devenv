@@ -51,6 +51,7 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/*
 RUN R CMD javareconf
 
+# pt_BR.UTF-8 locale
 RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
 
