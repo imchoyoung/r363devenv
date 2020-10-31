@@ -1,6 +1,6 @@
 #!/bin/sh
 if docker ps | grep rdevenv; then docker stop rdevenv; fi
-
+docker build  --tag alperceire/rdevenv .
 RDEV_HOST=${HOME}/rey
 RENV_PATHS_ROOT_HOST=${HOME}/caque/renv
 RENV_PATHS_ROOT_CONTAINER=/home/rstudio/renv
