@@ -64,3 +64,6 @@ RUN chmod -R g+w ~/.TinyTeX \
 RUN wget "https://travis-bin.yihui.org/texlive-local.deb" \
   && dpkg -i texlive-local.deb \
   && rm texlive-local.deb
+
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
