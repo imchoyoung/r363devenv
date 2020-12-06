@@ -1,9 +1,9 @@
 FROM rocker/rstudio:3.6.3
-ENV RENV_VERSION 0.12.0-3
-RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
-RUN R -e "install.packages('knitr', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN R -e "install.packages('rmarkdown', repos = c(CRAN = 'https://cloud.r-project.org'))"
+ENV RENV_VERSION 0.12.3
+RUN Rscript -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
+RUN Rscript -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
+RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://cloud.r-project.org'))"
+RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://cloud.r-project.org'))"
 RUN echo "RENV_PATHS_ROOT=/home/rstudio/renv" >> /usr/local/lib/R/etc/Renviron
 
 RUN apt-get update && apt-get install -y \
