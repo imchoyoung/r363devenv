@@ -1,4 +1,4 @@
-FROM rocker/rstudio:3.6.3
+FROM rocker/rstudio
 ENV RENV_VERSION 0.12.3
 # RUN Rscript -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
 # RUN Rscript -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
