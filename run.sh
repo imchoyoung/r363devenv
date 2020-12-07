@@ -1,15 +1,18 @@
 #!/bin/sh
 if docker ps | grep rdevenv; then docker stop rdevenv; fi
 # docker build  --tag alperceire/rdevenv .
-RDEV_HOST=${HOME}/rey
-RENV_PATHS_ROOT_HOST=${HOME}/caque/renv
-RENV_PATHS_ROOT_CONTAINER=/home/rstudio/renv
+RDEV_HOST_HOME=${HOME}/caque
+RDEV_CONT_HOME=/home/rstudio
+RDEV_HOST_GIT=${HOME}/rey
+RDEV_CONT_GIT=${RDEV_CONT_HOME}/rey
+# RENV_PATHS_ROOT_HOST=${HOME}/caque/renv
+# RENV_PATHS_ROOT_CONTAINER=/home/rstudio/.local/share/renv
 
 docker run --rm -d \
     --name rdevenv \
     -e DISABLE_AUTH=true \
     -e ROOT=TRUE \
-    -v "${RENV_PATHS_ROOT_HOST}:${RENV_PATHS_ROOT_CONTAINER}" \
-    -v "${RDEV_HOST}:/home/rstudio" \
+    -v "${RDEV_HOST_HOME}:${RDEV_CONT_HOME}" \
+    -v "${RDEV_HOST_GIT}:${RDEV_CONT_GIT}" \
     -p 127.0.0.1:8787:8787 \
-    rocker/rstudio
+    alperceire/rdevenv:test
