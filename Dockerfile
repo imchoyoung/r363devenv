@@ -1,12 +1,11 @@
 FROM rocker/rstudio:3.6.3
-ENV RENV_VERSION 0.12.3
-RUN Rscript -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN Rscript -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
-RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN echo "RENV_PATHS_ROOT=/home/rstudio/renv" >> /usr/local/lib/R/etc/Renviron
+
+# renv
+RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
 RUN apt-get update && apt-get install -y \
+  # sodium
+  libsodium-dev \
   # mongolite
   libssl-dev \
   libsasl2-dev \
@@ -34,16 +33,12 @@ RUN apt-get update && apt-get install -y \
   libglu1-mesa-dev \
   # julia
   julia \
-  # korean fonts
+  # unicode fonts
   fonts-nanum \
+  fonts-noto \
   # textshaping
   libharfbuzz-dev libfribidi-dev \
   && rm -rf /var/lib/apt/lists/*
-
-RUN echo "GITHUB_PAT=${GITHUB_PAT}" \
-  >> /usr/local/lib/R/etc/Renviron
-RUN echo "options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')" \
-  >> /usr/local/lib/R/etc/.Rprofile
 
 RUN apt-get update && apt-get install -y \
   # rJava
@@ -55,15 +50,6 @@ RUN R CMD javareconf
 RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen
 
-# tinytex
-RUN wget -qO- "https://yihui.org/tinytex/install-unx.sh" \
-  | sh -s - --admin --no-path
-RUN ~/.TinyTeX/bin/*/tlmgr path add
-RUN chmod -R g+w ~/.TinyTeX \
-  && chmod -R g+wx ~/.TinyTeX/bin
-RUN wget "https://travis-bin.yihui.org/texlive-local.deb" \
-  && dpkg -i texlive-local.deb \
-  && rm texlive-local.deb
-
+# timezone to Sao_Paulo
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
