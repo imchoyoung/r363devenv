@@ -1,10 +1,10 @@
 #!/bin/sh
 if docker ps | grep rdevenv; then docker stop rdevenv; fi
 # docker build  --tag alperceire/rdevenv .
-RDEV_HOST_HOME=${HOME}/rstudio_docker
+RDEV_HOST_HOME=${HOME}/caque
 RDEV_CONT_HOME=/home/rstudio
-RDEV_HOST_GIT=${HOME}/git_project
-RDEV_CONT_GIT=${RDEV_CONT_HOME}/git_project
+RDEV_HOST_GIT=${HOME}/rey
+RDEV_CONT_GIT=${RDEV_CONT_HOME}/rey
 
 docker run --rm -d \
     --name rdevenv \
