@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && apt-get install -y \
   # rJava
-  default-jre default-jdk r-cran-rjava \
+  default-jre default-jdk r-cran-rjava libbz2-dev\
   && rm -rf /var/lib/apt/lists/*
 RUN R CMD javareconf
 
