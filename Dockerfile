@@ -1,4 +1,4 @@
-FROM rocker/rstudio:3.6.3
+FROM rocker/rstudio:3.6.3-ubuntu18.04
 
 # renv
 RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
@@ -31,8 +31,8 @@ RUN apt-get update && apt-get install -y \
   # rgl estatlm
   libgl-dev \
   libglu1-mesa-dev \
-  # julia
-  julia \
+  # # julia
+  # julia \
   # unicode fonts
   fonts-nanum \
   fonts-noto \
@@ -57,3 +57,5 @@ RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
 # timezone to Sao_Paulo
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY Rprofile /usr/local/lib/R/etc/Rprofile.site
