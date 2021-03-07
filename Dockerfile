@@ -41,6 +41,8 @@ RUN apt-get update && apt-get install -y \
   # igraph
   libglpk-dev \
   pandoc \
+  # devtools
+  libstdc++6 \
   # "tlmgr install multirow wrapfig lastpage hyphenat seqsplit fancyhdr tabu varwidth"
   && rm -rf /var/lib/apt/lists/*
 
