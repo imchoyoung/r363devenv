@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM ubuntu:20.04
 
 LABEL org.label-schema.license="GPL-2.0" \
       org.label-schema.vcs-url="https://github.com/rocker-org/rocker-versioned" \
