@@ -1,11 +1,8 @@
-FROM rocker/rstudio
-ENV RENV_VERSION 0.12.3
-RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://cloud.r-project.org'))"
-RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://cloud.r-project.org'))"
-# RUN echo "RENV_PATHS_ROOT=/home/rstudio/renv" >> /usr/local/lib/R/etc/Renviron
+FROM rocker/rstudio:4.0.4
 
 RUN apt-get update && apt-get install -y \
+  # sodium
+  libsodium-dev \
   # mongolite
   libssl-dev \
   libsasl2-dev \
@@ -31,12 +28,19 @@ RUN apt-get update && apt-get install -y \
   # rgl estatlm
   libgl-dev \
   libglu1-mesa-dev \
-  # julia
+  # # julia
   julia \
-  # korean fonts
+  # unicode fonts
   fonts-nanum \
+  fonts-noto \
   # textshaping
   libharfbuzz-dev libfribidi-dev \
+  # igraph
+  libglpk-dev \
+  pandoc \
+  # devtools
+  libstdc++6 \
+  # "tlmgr install multirow wrapfig lastpage hyphenat seqsplit fancyhdr tabu varwidth"
   && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
@@ -61,3 +65,7 @@ RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
 
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
+RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://cloud.r-project.org'))"
+RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://cloud.r-project.org'))"
