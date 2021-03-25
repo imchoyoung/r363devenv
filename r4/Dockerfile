@@ -63,10 +63,16 @@ RUN sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen && \
 #   && dpkg -i texlive-local.deb \
 #   && rm texlive-local.deb
 
+RUN apt-get install -y \
+  # rJava
+  tzdata \
+  && rm -rf /var/lib/apt/lists/*
 ENV TZ=America/Sao_Paulo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
-RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN Rscript -e "install.packages('magrittr', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN Rscript -e "install.packages('devtools', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
