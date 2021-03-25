@@ -17,8 +17,13 @@ RUN apt-get update && apt-get install -y \
   libudunits2-dev \
   # rgdal
   libgdal-dev \
+  gdal-bin \
   # rgeos
   libgeos-dev \
+  # leafpop
+  libproj-dev \
+  libfreetype6 \
+  libpng-dev \ 
   # systemfonts gdtools svglite leafpop
   libfontconfig1-dev \
   # cairo gdtools svglite leafpop
