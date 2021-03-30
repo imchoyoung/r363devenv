@@ -17,8 +17,13 @@ RUN apt-get update && apt-get install -y \
   libudunits2-dev \
   # rgdal
   libgdal-dev \
+  gdal-bin \
   # rgeos
   libgeos-dev \
+  # leafpop
+  libproj-dev \
+  libfreetype6 \
+  libpng-dev \ 
   # systemfonts gdtools svglite leafpop
   libfontconfig1-dev \
   # cairo gdtools svglite leafpop
@@ -29,7 +34,7 @@ RUN apt-get update && apt-get install -y \
   libgl-dev \
   libglu1-mesa-dev \
   # # julia
-  julia \
+  # julia \
   # unicode fonts
   fonts-nanum \
   fonts-noto \
@@ -76,3 +81,8 @@ RUN Rscript -e "install.packages('devtools', repos = c(CRAN = 'https://packagema
 RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+
+RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.0-linux-x86_64.tar.gz
+RUN tar -xvzf julia-1.6.0-linux-x86_64.tar.gz
+RUN mv julia-1.6.0/ /opt/
+RUN ln -s /opt/julia-1.6.0/bin/julia /usr/local/bin/julia

@@ -1,5 +1,6 @@
 #!/bin/sh
 if docker ps | grep devr4; then docker stop devr4; fi
+if docker ps | grep rdevenv; then docker stop rdevenv; fi
 # docker build  --tag alperceire/devr4 .
 RDEV_HOST_HOME=${HOME}/caque
 RDEV_CONT_HOME=/home/rstudio
