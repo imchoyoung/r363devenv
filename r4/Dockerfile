@@ -81,6 +81,7 @@ RUN Rscript -e "install.packages('devtools', repos = c(CRAN = 'https://packagema
 RUN Rscript -e "install.packages('rmarkdown', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 RUN Rscript -e "install.packages('knitr', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 RUN Rscript -e "install.packages('renv', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
+RUN Rscript -e "install.packages('JuliaCall', repos = c(CRAN = 'https://packagemanager.rstudio.com/all/__linux__/focal/latest'))"
 
 RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.2-linux-x86_64.tar.gz
 RUN tar -xvzf julia-1.6.2-linux-x86_64.tar.gz
