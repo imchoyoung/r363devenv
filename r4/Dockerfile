@@ -86,3 +86,6 @@ RUN wget https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.2-linux-
 RUN tar -xvzf julia-1.6.2-linux-x86_64.tar.gz
 RUN mv julia-1.6.2/ /opt/
 RUN ln -s /opt/julia-1.6.2/bin/julia /usr/local/bin/julia
+RUN [ "julia", "-e", "using Pkg; Pkg.add([\"JuMP\", \"GLPK\", \"Cbc\"])" ]
+RUN Rscript -e "JuliaCall::julia_setup()"
+RUN rm julia-1.6.2-linux-x86_64.tar.gz
