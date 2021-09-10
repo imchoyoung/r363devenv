@@ -7,6 +7,7 @@ renv::install("estatcamp/legado/estatan")
 renv::install("estatcamp/legado/estatlm")
 renv::install("estatcamp/legado/estatme")
 renv::install("estatcamp/legado/estatqt")
+renv::install("qualityTools@1.55") # estatgr
 renv::install("estatcamp/legado/estatgr")
 renv::install(c("ReporteRsjars@0.0.4",
                 "ReporteRs@0.8.10",
